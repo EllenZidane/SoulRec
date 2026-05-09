@@ -1,0 +1,712 @@
+/* Container principal da barra de busca */
+.home-search-form-container {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border-radius: 100px; /* Deixa as pontas totalmente arredondadas */
+    padding: 8px 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); /* Sombra suave */
+    border: 1px solid #f0f0f0;
+    max-width: 800px;
+    margin: 20px auto;
+    position: relative;
+}
+
+/* Estilização do ícone à esquerda (o caderninho) */
+.placeholder-picto::before {
+    content: "📖"; /* Você pode substituir por um ícone SVG ou FontAwesome */
+    margin-right: 10px;
+    color: #FF5A5F;
+    font-size: 1.2rem;
+}
+
+/* Área de texto e animação */
+.placeholder-animated {
+    flex-grow: 1;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    cursor: text;
+}
+
+/* Esconde o input real para manter apenas o visual do placeholder animado */
+.HomeV2_input {
+    border: none;
+    outline: none;
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    background: transparent;
+}
+
+/* O botão "Buscar" rosa/coral */
+.HomeV2_searchButton {
+    background-color: #FF5A5F; /* Cor característica do Superprof */
+    color: white;
+    border: none;
+    border-radius: 100px;
+    padding: 12px 35px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-left: 10px;
+}
+
+.HomeV2_searchButton:hover {
+    background-color: #e04a4f;
+}
+
+/* Ajuste para dispositivos móveis */
+@media (max-width: 768px) {
+    .home-search-form-container {
+        flex-direction: column;
+        border-radius: 20px;
+        padding: 15px;
+    }
+    
+    .HomeV2_searchButton {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 10px;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 8%; 
+    background-color: #fff; 
+    border-bottom: 1px solid #eee; 
+    position: sticky; 
+    top: 0; 
+    z-index: 1000
+}
+
+/* Logo */
+.logo a {
+    display: flex;
+    align-items: center;
+    gap: 10px;           
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+}
+
+/* Estilo específico para o seu ícone SVG */
+.icon-music {
+    color: #e63946;   
+    width: 38px;         
+    height: 38px;
+}
+
+
+/* Links de Navegação */
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+    margin-left: auto; 
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #000000; 
+    font-size: 1.2rem;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #e63946; /* Vermelho ao passar o mouse */
+}
+
+/* Botões */
+.nav-buttons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.btn-login {
+    text-decoration: none;
+    color: #333;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.btn-signup {
+    text-decoration: none;
+    background-color: #e63946; 
+    color: white;
+    padding: 10px 25px;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-signup:hover {
+    background-color: #000000;
+}
+
+.hero {
+    display: flex;
+    flex-direction: column;    
+    align-items: center;     
+    justify-content: center;   
+    text-align: center;      
+    padding: 100px 20px;       
+    background: linear-gradient(to bottom, #fff5f5, #ffffff); 
+}
+
+.hero h1 {
+    font-size: 3.5rem;         
+    color: #0d1117;           
+    max-width: 700px;          
+    margin-bottom: 20px;
+    font-weight: 800;
+}
+
+.hero p {
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 600px;         
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+/* Botões da seção central */
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.btn-primary {
+    background-color: #e63946;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btn-primary:hover{
+    background-color: #000000;
+ 
+}
+
+.btn-secondary {
+    background-color: #f8f9fa;
+    color: #333;
+    padding: 15px 30px;
+    border-radius: 5px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+}
+
+.btn-secondary:hover{
+    color: #e63946;
+    background-color: #ffebeb ;
+}
+
+.about {
+    padding: 80px 5%;
+    text-align: center;
+    background-color: #fff; /* Fundo branco */
+}
+
+.about h2 {
+    font-size: 2.5rem;
+    color: #0d1117;
+    margin-bottom: 20px;
+}
+
+.about .description {
+    max-width: 800px;
+    margin: 0 auto 60px auto;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Container dos 3 itens */
+.stats-container {
+    display: flex;
+    justify-content: center;
+    gap: 100px; /* Espaço entre os itens */
+    flex-wrap: wrap; /* Para ficar um embaixo do outro no celular */
+}
+
+.stat-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 200px;
+}
+
+/* Círculo rosado para os ícones */
+.icon-circle {
+    width: 60px;
+    height: 60px;
+    background-color: #fff0f0; /* Rosa bem clarinho */
+    color: #e63946;            /* Ícone em vermelho */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.stat-card h3 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.stat-card span {
+    font-size: 0.9rem;
+    color: #888;
+}
+
+/* Ajuste para celular */
+@media (max-width: 768px) {
+    .stats-container {
+        gap: 40px;
+    }
+}
+
+.courses {
+    padding: 80px 8%;
+    background-color: #fafafa; /* Um cinza bem clarinho para destacar os cards brancos */
+    text-align: center;
+}
+
+.courses-header h2 {
+    font-size: 2.2rem;
+    color: #0d1117;
+    margin-bottom: 10px;
+}
+
+.courses-header p {
+    color: #666;
+    margin-bottom: 50px;
+}
+
+/* Configuração da Grade de Cards */
+.courses-grid {
+    display: grid;
+    /* Cria 3 colunas iguais no PC */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 30px; /* Espaço entre os cards */
+}
+
+.course-card {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    text-align: left; /* Alinhamento à esquerda como na imagem */
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.course-card:hover {
+    transform: translateY(-5px); /* Efeito de levante ao passar o mouse */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.course-icon {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.course-card h3 {
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.course-card p {
+    font-size: 0.95rem;
+    color: #888;
+}
+
+/* Ajuste para telas pequenas */
+@media (max-width: 768px) {
+    .courses-grid {
+        grid-template-columns: 1fr; /* Uma coluna só no celular */
+    }
+}
+
+.teachers {
+    padding: 80px 8%;
+    background-color: #fffaf9; /* Tom de fundo levemente rosado como na imagem */
+    text-align: center;
+}
+
+.teachers-header h2 {
+    font-size: 2.2rem;
+    color: #0d1117;
+    margin-bottom: 10px;
+}
+
+.teachers-header p {
+    color: #888;
+    margin-bottom: 50px;
+}
+
+.teachers-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.teacher-card {
+    background-color: #fff;
+    padding: 40px 20px;
+    border-radius: 4px;
+    border: 1px solid #f0f0f0;
+    width: 320px; /* Largura fixa para manter o aspecto da imagem */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: 0.3s;
+}
+
+/* Efeito da Foto Circular */
+.teacher-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 25px;
+    background-color: #eee; /* Cor de fundo caso a imagem falhe */
+}
+
+.teacher-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Faz a foto preencher o círculo sem esticar */
+}
+
+.teacher-card h3 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.teacher-card .specialty {
+    color: #999;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.teacher-card .experience {
+    color: #bbb;
+    font-size: 0.85rem;
+}
+
+
+.card-link {
+    text-decoration: none;
+    color: inherit; 
+    display: flex;
+    flex-direction: column;
+
+}
+
+.teacher-card:hover {
+    transform: translateY(-5px);
+}
+
+/* 1. Preparamos o card para posicionar a mensagem dentro dele */
+.teacher-card {
+    position: relative; /* Isso é essencial para a mensagem não "fugir" do card */
+    cursor: pointer;
+}
+
+/* 2. Criamos o elemento da mensagem (invisível por padrão) */
+.teacher-card::after {
+    content: "Clique para ver perfil"; /* O texto da mensagem */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centraliza perfeitamente no meio do card */
+    
+    background-color: rgba(230, 57, 70, 0.95); /* Vermelho Soul Rec */
+    color: white;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    white-space: nowrap;
+    
+    opacity: 0;            /* Começa escondido */
+    transition: 0.3s ease; /* Efeito suave ao aparecer */
+    z-index: 10;           /* Garante que fique por cima de tudo */
+}
+
+/* 3. Quando passar o mouse no card, a mensagem aparece */
+.teacher-card:hover::after {
+    opacity: 1;
+}
+
+/* 4. Opcional: Escurece o conteúdo do card (foto e textos) para a mensagem destacar */
+.teacher-card:hover .teacher-img,
+.teacher-card:hover h3,
+.teacher-card:hover span {
+    filter: blur(1px) brightness(70%); /* Dá um leve desfoque e escurece */
+    transition: 0.3s;
+}
+
+/* =========================================
+   8. SEÇÃO DEPOIMENTOS
+   ========================================= */
+.testimonials {
+    padding: 100px 8%;
+    background-color: #fffaf9; /* Fundo rosado claro da imagem */
+    text-align: center;
+}
+
+.testimonials-header h2 {
+    font-size: 2.5rem;
+    color: #0d1117;
+    margin-bottom: 60px;
+    font-weight: 800;
+}
+
+.testimonials-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.testimonial-card {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 4px;
+    width: 350px;
+    text-align: left; /* Texto alinhado à esquerda como na imagem */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02); /* Sombra bem sutil */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.stars {
+    color: #e63946; /* Vermelho das estrelas */
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+}
+
+.testimonial-card p {
+    color: #555;
+    font-size: 1rem;
+    font-style: italic;
+    line-height: 1.6;
+}
+
+.testimonial-card h4 {
+    color: #333;
+    font-size: 1.1rem;
+    margin-top: 10px;
+}
+
+/* Ajuste Responsivo */
+@media (max-width: 768px) {
+    .testimonial-card {
+        width: 100%;
+    }
+}
+
+/* =========================================
+   9. SEÇÃO CTA (VERMELHA)
+   ========================================= */
+.cta-section {
+    background-color: #e63946;
+    color: white;
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.cta-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.cta-section p {
+    font-size: 1.1rem;
+    margin-bottom: 35px;
+    opacity: 0.9;
+}
+
+.btn-cta {
+    background-color: white;
+    color: #333;
+    text-decoration: none;
+    padding: 15px 40px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+
+.btn-cta:hover {
+    background-color: #f0f0f0;
+}
+
+/* =========================================
+   10. RODAPÉ (FOOTER)
+   ========================================= */
+.footer {
+    padding: 80px 8% 20px 8%;
+    background-color: #fff;
+    border-top: 1px solid #eee;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.footer-col {
+    flex: 1;
+    min-width: 200px;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.footer-col h3 {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.footer-col ul {
+    list-style: none;
+}
+
+.footer-col ul li {
+    margin-bottom: 10px;
+}
+
+.footer-col a {
+    text-decoration: none;
+    color: #666;
+    transition: 0.3s;
+}
+
+.footer-col a:hover {
+    color: #e63946;
+}
+
+.footer-col p {
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.footer-bottom {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    text-align: center;
+    color: #aaa;
+    font-size: 0.85rem;
+}
+
+/* Responsividade Mobile */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    .footer-logo {
+        justify-content: center;
+    }
+}
+
+
+/* Estilo do botão hambúrguer */
+.mobile-menu {
+    display: none; /* Escondido no PC */
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.mobile-menu span {
+    width: 30px;
+    height: 3px;
+    background-color: #333;
+    border-radius: 2px;
+}
+
+/* REGRAS PARA CELULAR (Telas menores que 768px) */
+@media (max-width: 768px) {
+    .mobile-menu {
+        display: flex; /* Mostra o botão no celular */
+    }
+
+    .nav-container {
+        display: none; /* Esconde o menu por padrão */
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        padding: 20px;
+        border-bottom: 1px solid #eee;
+        box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+    }
+
+    .nav-container.active {
+        display: flex; /* Mostra o menu quando clicado */
+    }
+
+    .nav-links {
+        flex-direction: column;
+        margin: 0 0 20px 0; /* Remove o margin-left: auto */
+        gap: 15px;
+        text-align: center;
+    }
+
+    .nav-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn-signup {
+        text-align: center;
+    }
+}
