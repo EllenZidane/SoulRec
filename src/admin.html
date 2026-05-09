@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soul Rec</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <!-- Icone e nome da escola -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <svg xmlns="http://w3.org" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-music"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+                    <span>Soul Rec</span>
+                </div>
+                
+                <!-- Botão de fechar (X) responsivo -->
+                <button class="mobile-close" id="btnCloseMobile">✕</button>
+            </div>
+            
+            <!--Menu de opções-->
+           <nav class="sidebar-nav">
+                <a href="#" id="link-dashboard" class="active">🏠 Dashboard</a>
+                <a href="javascript:void(0)" id="link-agenda">📅 Agenda</a>
+                <a href="#" >📺 Aulas</a>
+                <a href="#" id="link-cursos" style="display: none;">📓 Cursos</a>
+                <a href="#" id="link-professores" style="display: none;">👨‍🏫 Professores</a>
+                <a href="#">👤 Perfil</a>
+            </nav>
+
+            <a href="../index.html" class="logout">🚪 Sair</a>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <button class="mobile-toggle" id="btnMenuMobile">☰</button>
+
+                <div class="welcome-text">
+                    <h1 id="page-title">Área do Aluno</h1> <!-- ID para mudar o título via JS -->
+                </div>
+
+                <div class="user-profile">
+                    <svg id="theme-toggle" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon h-5 w-5"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>                <div class="user-info">
+                        <strong>João Silva</strong>
+                        <small>Aluno</small>
+                    </div>
+                    <div class="user-avatar">JS</div>
+                </div>
+            </header>
+
+            <!-- SEÇÃO 1: Conteúdo Principal -->
+            <div id="content-home">
+                <h2>Bem-vindo, João!</h2>
+                <p>Aqui está um resumo das suas próximas aulas</p><br>
+                <!-- Cards de Resumo -->
+                <div class="summary-cards">
+                    <div class="card">
+                        <div class="card-icon red">📅</div>
+                        <div>
+                            <strong>8</strong>
+                            <p>Aulas este mês</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon orange">⏰</div>
+                        <div>
+                            <strong>Amanhã</strong>
+                            <p>Próxima aula</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lista de Próximas Aulas -->
+                <section class="next-classes">
+                    <br><h3>Próximas Aulas</h3><br>
+                    
+                    <div class="class-item">
+                        <div class="class-info">
+                            <div class="class-icon">🎸</div>
+                            <div>
+                                <h4>Violão</h4>
+                                <p>Professor: Carlos Silva</p>
+                                <small>🗓️ 01/04/2026 às 14:00</small>
+                            </div>
+                        </div>
+                        <span class="tag tag-presencial">Presencial</span>
+                    </div>
+
+                    <div class="class-item">
+                        <div class="class-info">
+                            <div class="class-icon">🎹</div>
+                            <div>
+                                <h4>Piano</h4>
+                                <p>Professor: Carlos Silva</p>
+                                <small>🗓️ 03/04/2026 às 14:00</small>
+                            </div>
+                        </div>
+                        <div class="class-actions">
+                            <span class="tag-online">Online</span>
+                            <button class="btn-join">Entrar na aula</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- AVISOS-->
+                <section class="notices-container">
+                 <br><h3>Avisos</h3><br>
+
+                    <div class="notices-card">
+
+                        <div class="notice-item">
+                            <p><strong>Recital de Fim de Ano</strong> - As inscrições estão abertas até 30/04</p>
+                        </div>
+
+                        <div class="notice-item">
+                            <p><strong>Aula remarcada</strong> - A aula do dia 05/04 foi remarcada para 06/04</p>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- SEÇÃO 2: AGENDA  -->
+            <div id="content-agenda" style="display: none;">
+                <div class="agenda-header">
+                    <h2></h2>
+                    <p>Visualize e gerencie suas aulas agendadas</p><br>
+                    
+                </div>
+                
+                <div class="calendar-container">
+                    <div class="calendar-controls">
+                        <h3 id="month-display"></h3>
+                        <div class="calendar-arrows">
+                            <button type="button" id="prev-month" title="Mês Anterior">⟨</button>
+                            <button type="button" id="next-month" title="Próximo Mês">⟩</button>
+                        </div>
+                    </div>
+
+                    <!-- Grade do Calendário  -->
+                    <div class="calendar-grid" id="calendar-grid">
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEÇÃO 3: VIDEOAULAS -->
+            <div id="content-aulas" style="display: none;">
+                <div class="aulas-header">
+                    <p>Acesse o conteúdo gravado e estude no seu ritmo</p><br>
+                </div>
+
+                <!-- Frame de Filtros -->
+                <section class="filters-frame">
+
+                    <div class="filter-chip" onclick="FilterUI.toggleCalendar(this)">
+                        <span>Data</span>
+                        <span id="dataValue">dd/mm/yyyy 📆</span>
+
+                        <div class="calendar"></div>
+                    </div>
+
+
+                    <div class="filter-chip input-chip">
+                        <span>Nome do Vídeo</span>
+                        <input type="text" placeholder="Buscar..." id="searchInput">
+                    </div>
+
+                    <div class="filter-chip" onclick="FilterUI.toggleDropdown(this)">
+                            <span>Professor</span>
+                            <span id="professorValue">Todos</span>
+
+                            <div class="dropdown">
+                                <div onclick="FilterUI.selectOption(event,'professorValue','Todos')">Todos</div>
+                                <div onclick="FilterUI.selectOption(event,'professorValue','Carlos Silva')">Carlos Silva</div>
+                                <div onclick="FilterUI.selectOption(event,'professorValue','Lucas Santos')">Lucas Santos</div>
+                            </div>
+                    </div>
+
+                    <div class="filter-chip" onclick="FilterUI.toggleDropdown(this)">
+                            <span>Ordenar</span>
+                            <span id="orderValue">Mais recentes</span>
+
+                            <div class="dropdown">
+                                <div onclick="FilterUI.selectOption(event,'orderValue','Mais recentes')">Mais recentes</div>
+                                <div onclick="FilterUI.selectOption(event,'orderValue','Mais antigos')">Mais antigos</div>
+                                <div onclick="FilterUI.selectOption(event,'orderValue','A-Z')">A-Z</div>
+                            </div>
+                    </div>
+
+
+                    <button class="btn-filter">Filtrar</button>
+
+                </section>
+
+                <br><br>
+                <!-- Galeria de Vídeos -->
+                <div class="video-grid"></div>
+
+                <div class="video-modal" id="videoModal">
+                    <div class="video-modal-content">
+
+                        <button class="close-modal" onclick="closeVideo()">✕</button>
+
+                        <video id="modalVideo" controls controlsList="nodownload">
+                            <source id="modalSource" src="" type="video/mp4">
+                            Seu navegador não suporta vídeo.
+                        </video>
+
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+    </div>
+
+    <script src="../js/admin.js"></script>
+
+</body>
+</html>

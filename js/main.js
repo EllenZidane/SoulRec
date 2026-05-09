@@ -11,7 +11,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (formLogin) {
         formLogin.addEventListener('submit', (e) => {
             e.preventDefault();
-            window.location.href = "student.html"; 
+            const emailInput = formLogin.querySelector('input[type="email"]');
+            const email = emailInput.value;
+            
+            // Armazena o email no localStorage
+            localStorage.setItem('userEmail', email);
+            
+            if (email === 'admin@gmail.com' || email === 'teacher@gmail.com') {
+                window.location.href = "admin.html";
+            } else {
+                window.location.href = "student.html"; 
+            }
         });
     }
 

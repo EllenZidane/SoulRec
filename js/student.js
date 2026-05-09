@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+
     
     /* =========================================
        1. CONTROLE DE NAVEGAÇÃO
