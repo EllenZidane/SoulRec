@@ -92,6 +92,47 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    const mobileAutoCarousels = Array.from(document.querySelectorAll('.about-features, .courses-grid, .teachers-grid, .testimonials-grid'));
+    let carouselTimers = [];
+
+    const isVisible = (element) => {
+        const rect = element.getBoundingClientRect();
+        return rect.top < window.innerHeight && rect.bottom > 0 && rect.left < window.innerWidth && rect.right > 0;
+    };
+
+    const startCarouselAutoScroll = (track) => {
+        if (window.innerWidth > 768) return;
+        const timer = setInterval(() => {
+            if (!isVisible(track)) return;
+            const maxScroll = track.scrollWidth - track.clientWidth;
+            const nextScroll = Math.min(track.scrollLeft + track.clientWidth * 0.8, maxScroll);
+            if (track.scrollLeft >= maxScroll - 10) {
+                track.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+                track.scrollTo({ left: nextScroll, behavior: 'smooth' });
+            }
+        }, 5200);
+        carouselTimers.push(timer);
+    };
+
+    const stopCarouselAutoScroll = () => {
+        carouselTimers.forEach(timer => clearInterval(timer));
+        carouselTimers = [];
+    };
+
+    mobileAutoCarousels.forEach(track => {
+        track.addEventListener('mouseenter', stopCarouselAutoScroll);
+        track.addEventListener('touchstart', stopCarouselAutoScroll);
+    });
+
+    const setupCarousels = () => {
+        stopCarouselAutoScroll();
+        mobileAutoCarousels.forEach(track => startCarouselAutoScroll(track));
+    };
+
+    setupCarousels();
+    window.addEventListener('resize', setupCarousels);
+
     // MATRÍCULA (WHATSAPP)
     const formMatricula = document.getElementById('formMatricula');
     if (formMatricula) {
