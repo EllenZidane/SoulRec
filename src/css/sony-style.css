@@ -11,7 +11,7 @@ html {
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
+    line-height: 1.2;
     color: #ffffff;
     background-color: #000000;
 }
@@ -455,7 +455,7 @@ body {
 /* Stats Section */
 .stats {
     background-color: #111111;
-    padding: 4rem 0;
+    padding: 1rem 0;
 }
 
 .stats-container {
@@ -493,7 +493,7 @@ body {
 
 /* About Section */
 #about {
-    padding: 6rem 2rem;
+    padding: 1rem 2rem;
     background: linear-gradient(180deg, #000000 0%, rgba(17, 17, 17, 0.3) 50%, #000000 100%);
     position: relative;
     overflow: hidden;
@@ -653,7 +653,7 @@ body {
 
 /* Courses Section */
 #courses {
-    padding: 6rem 2rem;
+    padding: 1rem 2rem;
     background-color: #000000;
 }
 
@@ -749,7 +749,7 @@ body {
 
 /* Teachers Section */
 #teachers {
-    padding: 6rem 2rem;
+    padding: 1rem 2rem;
     background-color: #000000;
 }
 
@@ -808,7 +808,7 @@ body {
 
 /* Testimonials Section */
 #testimonials {
-    padding: 6rem 2rem;
+    padding: 1rem 2rem;
     background-color: #111111;
 }
 
@@ -885,7 +885,7 @@ svg:hover {
 
 /* CTA Section */
 .cta {
-    padding: 6rem 2rem;
+    padding: 1rem 2rem;
     background: linear-gradient(135deg, #ED1C24, #ff6b6b);
     text-align: center;
 }
@@ -1032,12 +1032,12 @@ svg:hover {
         margin-top: 60px;
     }
 
-    #about::before {
-        display: none;
+    .section-container {
+        padding: 0 1rem;
     }
 
-    .slide-content-wrapper {
-        grid-template-columns: 1fr;
+    #about::before {
+        display: none;
     }
 
     .slide-content-wrapper {
@@ -1051,26 +1051,27 @@ svg:hover {
         display: flex;
         align-items: flex-end;
         justify-content: center;
-        padding: 2rem 1.5rem 2.5rem;
-        background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.85) 100%);
+        padding: 1.6rem 1rem 2rem;
+        background: linear-gradient(180deg, transparent 45%, rgba(0, 0, 0, 0.88) 100%);
         z-index: 2;
     }
 
     .slide-image-column {
-        min-height: 80vh;
+        min-height: 70vh;
     }
 
     .slide-image-column::before {
-        background: linear-gradient(180deg, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.85) 100%);
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.88) 100%);
     }
 
     .slide-text {
         max-width: 100%;
         width: 100%;
+        padding-right: 0.4rem;
     }
 
     .slide-text h2 {
-        font-size: 2rem;
+        font-size: 1.95rem;
         line-height: 1.2;
     }
 
@@ -1091,54 +1092,40 @@ svg:hover {
     .teachers-grid,
     .testimonials-grid {
         display: flex;
-        gap: 0.75rem;
+        gap: 0.8rem;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
-        padding: 0 1rem 0.75rem 0.75rem;
+        padding: 0 0.75rem 0.75rem;
         scroll-padding-inline: 0.75rem;
         justify-content: flex-start;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .about-features::-webkit-scrollbar,
+    .courses-grid::-webkit-scrollbar,
+    .teachers-grid::-webkit-scrollbar,
+    .testimonials-grid::-webkit-scrollbar {
+        display: none;
     }
 
     .about-features > .feature-item,
     .courses-grid > .course-card,
     .teachers-grid > .teacher-card,
     .testimonials-grid > .testimonial-card {
-        width: min(320px, calc(100vw - 3rem));
-        min-width: 240px;
+        width: min(300px, calc(100vw - 2.2rem));
+        min-width: 220px;
+        max-width: 300px;
         flex: 0 0 auto;
         scroll-snap-align: start;
+    }
+
+    .about-features > .feature-item,
+    .courses-grid > .course-card,
+    .teachers-grid > .teacher-card,
+    .testimonials-grid > .testimonial-card {
         margin-right: 0.5rem;
-    }
-
-    .about-features::-webkit-scrollbar,
-    .courses-grid::-webkit-scrollbar,
-    .teachers-grid::-webkit-scrollbar,
-    .testimonials-grid::-webkit-scrollbar {
-        height: 8px;
-    }
-
-    .about-features::-webkit-scrollbar-thumb,
-    .courses-grid::-webkit-scrollbar-thumb,
-    .teachers-grid::-webkit-scrollbar-thumb,
-    .testimonials-grid::-webkit-scrollbar-thumb {
-        background: rgba(237, 28, 36, 0.35);
-        border-radius: 999px;
-    }
-
-    .about-features,
-    .courses-grid,
-    .teachers-grid,
-    .testimonials-grid {
-        scrollbar-width: thin;
-        -ms-overflow-style: none;
-    }
-
-    .about-features::-webkit-scrollbar,
-    .courses-grid::-webkit-scrollbar,
-    .teachers-grid::-webkit-scrollbar,
-    .testimonials-grid::-webkit-scrollbar {
-        display: block;
     }
 
     .cta h2 {
@@ -1152,6 +1139,33 @@ svg:hover {
 
     .stats-container {
         grid-template-columns: repeat(2, minmax(140px, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .slide-text-column {
+        padding: 1.3rem 0.9rem 1.6rem;
+    }
+
+    .slide-text h2 {
+        font-size: 1.75rem;
+    }
+
+    .about-features,
+    .courses-grid,
+    .teachers-grid,
+    .testimonials-grid {
+        gap: 0.6rem;
+        padding: 0 0.65rem 0.65rem;
+        scroll-padding-inline: 0.65rem;
+    }
+
+    .about-features > .feature-item,
+    .courses-grid > .course-card,
+    .teachers-grid > .teacher-card,
+    .testimonials-grid > .testimonial-card {
+        width: min(280px, calc(100vw - 2rem));
+        min-width: 220px;
     }
 }
 

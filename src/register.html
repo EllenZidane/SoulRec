@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar - Soul Rec</title>
-    <link rel="stylesheet" href="css/login.css"> 
-
+    <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
-    <div class="login-container">
+    <main class="login-hero">
         <div class="login-card">
-            <!-- Ícone da Nota Musical -->
             <div class="icon-header">
-                <svg xmlns="http://w3.org" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-music">
+                    <path d="M9 18V5l12-2v13"></path>
+                    <circle cx="6" cy="18" r="3"></circle>
+                    <circle cx="18" cy="16" r="3"></circle>
+                </svg>
             </div>
 
             <h2>Vamos Começar?</h2>
@@ -20,33 +22,33 @@
 
             <form id="formMatricula">
                 <div class="input-group">
+                    <label for="nome">Nome completo</label>
                     <input type="text" id="nome" placeholder="João Silva" required>
                 </div>
                 <div class="input-group">
+                    <label for="email">E-mail</label>
                     <input type="email" id="email" placeholder="seu@email.com" required>
                 </div>
                 <div class="input-group">
+                    <label for="telefone">Telefone</label>
                     <input type="tel" id="telefone" placeholder="(11) 98765-4321" required>
                 </div>
-                
                 <button type="submit" class="btn-login">Começar</button>
             </form>
 
             <p class="signup-text">Já tem uma conta? <a href="login.html">Faça login</a></p>
             <a href="../index.html" class="back-link">← Voltar para o site</a>
         </div>
-    </div>
 
-    <!-- Mensagem de Sucesso -->
-    <div id="success-message" style="display: none;">
-        <div class="icon-header" style="background-color: #d4edda; color: #28a745;">
-            <svg xmlns="http://w3.org" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        <div id="success-message" class="success-card" style="display: none;">
+            <div class="icon-header" style="background-color: #d4edda; color: #28a745;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <h2 style="color: #28a745;">Matrícula Enviada!</h2>
+            <p class="subtitle">Volte para nosso site e conheça sobre a escola!</p>
         </div>
-        <h2 style="color: #28a745;">Matrícula Enviada!</h2>
-        <p class="subtitle">Volte para nosso site e conheça sobre a escola!!</p>
-    </div>
+    </main>
 
     <script src="../js/main.js"></script>
-
 </body>
 </html>

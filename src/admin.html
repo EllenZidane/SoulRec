@@ -15,9 +15,10 @@
                     <svg xmlns="http://w3.org" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-music"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
                     <span>Soul Rec</span>
                 </div>
-                
-                <!-- Botão de fechar (X) responsivo -->
-                <button class="mobile-close" id="btnCloseMobile">✕</button>
+                <div class="sidebar-controls">
+                    <svg id="theme-toggle" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-toggle-icon"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+                    <button class="mobile-close" id="btnCloseMobile">✕</button>
+                </div>
             </div>
             
             <!--Menu de opções-->
@@ -28,9 +29,11 @@
                 <a href="#" id="link-cursos" style="display: none;">📓 Cursos</a>
                 <a href="#" id="link-professores" style="display: none;">👨‍🏫 Professores</a>
                 <a href="#">👤 Perfil</a>
+                
             </nav>
 
-            <a href="../index.html" class="logout">🚪 Sair</a>
+            <a href="login.html" class="logout">🚪 Sair</a>
+            
         </aside>
 
         <main class="main-content">
@@ -38,21 +41,21 @@
                 <button class="mobile-toggle" id="btnMenuMobile">☰</button>
 
                 <div class="welcome-text">
-                    <h1 id="page-title">Área do Aluno</h1> <!-- ID para mudar o título via JS -->
+                    <h1 id="page-title"></h1> <!-- ID para mudar o título via JS -->
                 </div>
 
                 <div class="user-profile">
-                    <svg id="theme-toggle" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon h-5 w-5"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>                <div class="user-info">
-                        <strong>João Silva</strong>
-                        <small>Aluno</small>
+                    <div class="user-info">
+                        <strong id="userName"></strong>
+                        <small id="userRole"></small>
                     </div>
-                    <div class="user-avatar">JS</div>
+                    <div class="user-avatar" id="userAvatar"></div>
                 </div>
             </header>
 
             <!-- SEÇÃO 1: Conteúdo Principal -->
             <div id="content-home">
-                <h2>Bem-vindo, João!</h2>
+                <h2 id="welcomeTitle">Bem-vinda, Ellen!</h2>
                 <p>Aqui está um resumo das suas próximas aulas</p><br>
                 <!-- Cards de Resumo -->
                 <div class="summary-cards">
@@ -108,14 +111,14 @@
                 <section class="notices-container">
                  <br><h3>Avisos</h3><br>
 
-                    <div class="notices-card">
+                    <div class="notices-card" id="noticesCard"></div>
 
-                        <div class="notice-item">
-                            <p><strong>Recital de Fim de Ano</strong> - As inscrições estão abertas até 30/04</p>
-                        </div>
-
-                        <div class="notice-item">
-                            <p><strong>Aula remarcada</strong> - A aula do dia 05/04 foi remarcada para 06/04</p>
+                    <div class="notice-editor" id="noticeEditor" style="display: none; margin-top: 1rem; gap: 0.75rem;">
+                        <textarea id="noticeText" rows="3" placeholder="Digite o aviso..." style="width:100%; padding:12px; border-radius:12px; border:1px solid rgba(0,0,0,0.15);"></textarea>
+                        <div class="notice-actions" style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+                            <button id="saveNoticeBtn" type="button" class="notice-action save">Salvar aviso</button>
+                            <button id="cancelNoticeBtn" type="button" class="notice-action cancel">Cancelar</button>
+                            <button id="addNoticeBtn" type="button" class="notice-action edit">Novo aviso</button>
                         </div>
                     </div>
                 </section>

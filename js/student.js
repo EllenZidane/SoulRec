@@ -121,6 +121,35 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    const noticesCardStudent = document.getElementById('noticesCardStudent');
+    const renderStudentNotices = () => {
+        if (!noticesCardStudent) return;
+        const saved = localStorage.getItem('soulRecNotices');
+        let notices = [];
+        if (saved) {
+            try {
+                notices = JSON.parse(saved);
+            } catch (error) {
+                console.warn('Erro ao ler avisos:', error);
+            }
+        }
+        if (!Array.isArray(notices) || notices.length === 0) {
+            notices = [
+                'Recital de Fim de Ano - As inscrições estão abertas até 30/04',
+                'Aula remarcada - A aula do dia 05/04 foi remarcada para 06/04'
+            ];
+        }
+
+        noticesCardStudent.innerHTML = '';
+        notices.forEach((text) => {
+            const noticeItem = document.createElement('div');
+            noticeItem.className = 'notice-item';
+            noticeItem.innerHTML = `<p>${text}</p>`;
+            noticesCardStudent.appendChild(noticeItem);
+        });
+    };
+
+    renderStudentNotices();
 
 });
 

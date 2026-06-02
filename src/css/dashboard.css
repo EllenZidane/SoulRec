@@ -106,6 +106,23 @@ body {
     color: var(--primary);
 }
 
+.sidebar-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.theme-toggle-icon {
+    cursor: pointer;
+    color: var(--text);
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.theme-toggle-icon:hover {
+    transform: scale(1.05);
+    color: var(--primary);
+}
+
 .sidebar-nav {
     display: flex;
     flex-direction: column;
@@ -239,6 +256,63 @@ body {
     padding: 10px 20px;
     border-radius: 6px;
     font-weight: bold;
+}
+
+.notice-item {
+    padding: 18px;
+    border-radius: 14px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    margin-bottom: 14px;
+}
+
+.notice-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 12px;
+}
+
+.notice-action {
+    border: none;
+    border-radius: 10px;
+    padding: 10px 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.notice-action:hover {
+    transform: translateY(-1px);
+    opacity: 0.95;
+}
+
+.notice-action.edit,
+.notice-action.save {
+    background: var(--primary);
+    color: #fff;
+}
+
+.notice-action.delete {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.notice-action.cancel {
+    background: var(--hover);
+    color: var(--text);
+}
+
+.notice-editor textarea {
+    width: 100%;
+    min-height: 120px;
+    border-radius: 14px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    padding: 16px;
+    resize: vertical;
+    font-family: inherit;
+    background: var(--bg);
+    color: var(--text);
 }
 
 /* =========================================

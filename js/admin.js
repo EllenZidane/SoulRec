@@ -5,11 +5,148 @@ document.addEventListener('DOMContentLoaded', () => {
     const userEmail = localStorage.getItem('userEmail');
     const linkCursos = document.getElementById('link-cursos');
     const linkProfessores = document.getElementById('link-professores');
+    const userName = document.getElementById('userName');
+    const userRole = document.getElementById('userRole');
+    const welcomeTitle = document.getElementById('welcomeTitle');
+    const pageTitle = document.getElementById('page-title');
+    const userAvatar = document.getElementById('userAvatar');
     
     if (userEmail === 'admin@gmail.com') {
         if (linkCursos) linkCursos.style.display = '';
         if (linkProfessores) linkProfessores.style.display = '';
+        if (userName) userName.textContent = 'Ellen';
+        if (userRole) userRole.textContent = 'Administrador';
+        if (welcomeTitle) welcomeTitle.textContent = 'Bem-vinda, Ellen!';
+        if (pageTitle) pageTitle.textContent = 'Área Administrativa';
+        if (userAvatar) userAvatar.textContent = 'ES';
+    } else if (userEmail === 'teacher@gmail.com') {
+        if (linkProfessores) linkProfessores.style.display = '';
+        if (userName) userName.textContent = 'Lucas';
+        if (userRole) userRole.textContent = 'Professor';
+        if (welcomeTitle) welcomeTitle.textContent = 'Bem-vindo, Lucas!';
+        if (pageTitle) pageTitle.textContent = 'Área do Professor';
+        if (userAvatar) userAvatar.textContent = 'LS';
     }
+
+    const noticesCard = document.getElementById('noticesCard');
+    const noticeEditor = document.getElementById('noticeEditor');
+    const noticeText = document.getElementById('noticeText');
+    const saveNoticeBtn = document.getElementById('saveNoticeBtn');
+    const cancelNoticeBtn = document.getElementById('cancelNoticeBtn');
+    const addNoticeBtn = document.getElementById('addNoticeBtn');
+    let currentEditIndex = null;
+
+    const defaultNotices = [
+        'Recital de Fim de Ano - As inscrições estão abertas até 30/04',
+        'Aula remarcada - A aula do dia 05/04 foi remarcada para 06/04'
+    ];
+
+    const loadNotices = () => {
+        const saved = localStorage.getItem('soulRecNotices');
+        if (saved) {
+            try {
+                return JSON.parse(saved);
+            } catch (error) {
+                console.warn('Erro ao ler avisos:', error);
+            }
+        }
+        localStorage.setItem('soulRecNotices', JSON.stringify(defaultNotices));
+        return [...defaultNotices];
+    };
+
+    const saveNotices = (notices) => {
+        localStorage.setItem('soulRecNotices', JSON.stringify(notices));
+    };
+
+    const renderNotices = () => {
+        if (!noticesCard) return;
+        const notices = loadNotices();
+        noticesCard.innerHTML = '';
+
+        notices.forEach((text, index) => {
+            const noticeItem = document.createElement('div');
+            noticeItem.className = 'notice-item';
+            noticeItem.innerHTML = `<p>${text}</p>`;
+
+            if (userEmail === 'admin@gmail.com') {
+                const actionRow = document.createElement('div');
+                actionRow.className = 'notice-actions';
+                actionRow.style.marginTop = '10px';
+
+                const editButton = document.createElement('button');
+                editButton.type = 'button';
+                editButton.className = 'notice-action edit';
+                editButton.textContent = 'Editar';
+                editButton.addEventListener('click', () => {
+                    currentEditIndex = index;
+                    if (noticeText) noticeText.value = text;
+                    if (noticeEditor) noticeEditor.style.display = 'flex';
+                    if (noticeText) noticeText.focus();
+                });
+
+                const deleteButton = document.createElement('button');
+                deleteButton.type = 'button';
+                deleteButton.className = 'notice-action delete';
+                deleteButton.textContent = 'Excluir';
+                deleteButton.addEventListener('click', () => {
+                    const notices = loadNotices();
+                    notices.splice(index, 1);
+                    saveNotices(notices);
+                    renderNotices();
+                });
+
+                actionRow.appendChild(editButton);
+                actionRow.appendChild(deleteButton);
+                noticeItem.appendChild(actionRow);
+            }
+
+            noticesCard.appendChild(noticeItem);
+        });
+
+        if (userEmail === 'admin@gmail.com' && noticeEditor) {
+            noticeEditor.style.display = 'flex';
+        } else if (noticeEditor) {
+            noticeEditor.style.display = 'none';
+        }
+    };
+
+    if (saveNoticeBtn) {
+        saveNoticeBtn.addEventListener('click', () => {
+            if (!noticeText) return;
+            const value = noticeText.value.trim();
+            if (!value) return;
+            const notices = loadNotices();
+            if (currentEditIndex === null) {
+                notices.unshift(value);
+            } else {
+                notices[currentEditIndex] = value;
+            }
+            saveNotices(notices);
+            currentEditIndex = null;
+            if (noticeText) noticeText.value = '';
+            if (noticeEditor) noticeEditor.style.display = 'flex';
+            renderNotices();
+        });
+    }
+
+    if (cancelNoticeBtn) {
+        cancelNoticeBtn.addEventListener('click', () => {
+            currentEditIndex = null;
+            if (noticeText) noticeText.value = '';
+            if (noticeEditor) noticeEditor.style.display = 'none';
+        });
+    }
+
+    if (addNoticeBtn) {
+        addNoticeBtn.addEventListener('click', () => {
+            currentEditIndex = null;
+            if (noticeText) noticeText.value = '';
+            if (noticeEditor) noticeEditor.style.display = 'flex';
+            if (noticeText) noticeText.focus();
+        });
+    }
+
+    renderNotices();
 
     /* =========================================
        1. CONTROLE DE NAVEGAÇÃO
@@ -19,7 +156,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnAgenda = document.getElementById('link-agenda');
     const contentHome = document.getElementById('content-home');
     const contentAgenda = document.getElementById('content-agenda');
-    const pageTitle = document.getElementById('page-title');
     const contentAulas = document.getElementById('content-aulas');
     
 
@@ -48,7 +184,6 @@ document.addEventListener('DOMContentLoaded', () => {
             contentAulas.style.display = 'none';
             
             // Atualiza interface
-            if(pageTitle) pageTitle.innerText = "Área do Aluno";
             btnAgenda.classList.remove('active');
             btnAulas.classList.remove('active');
             btnDashboard.classList.add('active');
@@ -118,17 +253,28 @@ document.addEventListener('DOMContentLoaded', () => {
     ========================================= */
     
     const themeToggle = document.getElementById('theme-toggle');
+    const moonPath = '<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>';
+    const sunPaths = '<circle cx="12" cy="12" r="5"></circle>' +
+                     '<line x1="12" y1="1" x2="12" y2="3"></line>' +
+                     '<line x1="12" y1="21" x2="12" y2="23"></line>' +
+                     '<line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>' +
+                     '<line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>' +
+                     '<line x1="1" y1="12" x2="3" y2="12"></line>' +
+                     '<line x1="21" y1="12" x2="23" y2="12"></line>' +
+                     '<line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>' +
+                     '<line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
+
+    const setThemeIcon = () => {
+        if (!themeToggle) return;
+        themeToggle.innerHTML = document.body.classList.contains('dark') ? sunPaths : moonPath;
+    };
 
     if (themeToggle) {
         themeToggle.addEventListener('click', () => {
             document.body.classList.toggle('dark');
-
-            if (document.body.classList.contains('dark')) {
-                themeToggle.innerText = '☀️';
-            } else {
-                themeToggle.innerText = '🌙';
-            }
+            setThemeIcon();
         });
+        setThemeIcon();
     }
 
 
