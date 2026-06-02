@@ -8,16 +8,17 @@
 </head>
 <body>
     <div class="dashboard-wrapper">
-        <!-- Icone e nome da escola -->
+<!-- Icone e nome da escola -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="sidebar-logo">
                     <svg xmlns="http://w3.org" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-music"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
                     <span>Soul Rec</span>
                 </div>
-                
-                <!-- Botão de fechar (X) responsivo -->
-                <button class="mobile-close" id="btnCloseMobile">✕</button>
+                <div class="sidebar-controls">
+                    <svg id="theme-toggle" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-toggle-icon"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+                    <button class="mobile-close" id="btnCloseMobile">✕</button>
+                </div>
             </div>
             
             <!--Menu de opções-->
@@ -41,7 +42,7 @@
                 </div>
 
                 <div class="user-profile">
-                    <svg id="theme-toggle" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon h-5 w-5"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>                <div class="user-info">
+                    <div class="user-info">
                         <strong>João Silva</strong>
                         <small>Aluno</small>
                     </div>
@@ -135,7 +136,56 @@
                 </div>
             </div>
 
-            <!-- SEÇÃO 3: VIDEOAULAS -->
+            <!-- SEÇÃO 3: CURSOS -->
+            <div id="content-cursos" style="display: none;">
+                <div class="cursos-header">
+                    <h2>Cursos Disponíveis</h2>
+                    <p>Explore e escolha o instrumento que deseja aprender</p><br>
+                </div>
+
+                <!-- Frame de Filtros -->
+                <section class="filters-frame">
+                    <div class="filter-chip input-chip">
+                        <span>Buscar Curso</span>
+                        <input type="text" placeholder="Digite o instrumento..." id="searchCurso">
+                    </div>
+
+                    <div class="filter-chip" onclick="FilterUI.toggleDropdown(this)">
+                        <span>Nível</span>
+                        <span id="nivelValue">Todos</span>
+                        <div class="dropdown">
+                            <div onclick="FilterUI.selectOption(event,'nivelValue','Todos')">Todos</div>
+                            <div onclick="FilterUI.selectOption(event,'nivelValue','Iniciante')">Iniciante</div>
+                            <div onclick="FilterUI.selectOption(event,'nivelValue','Intermediário')">Intermediário</div>
+                            <div onclick="FilterUI.selectOption(event,'nivelValue','Avançado')">Avançado</div>
+                        </div>
+                    </div>
+
+                    <button class="btn-filter" id="btnFiltrarCursos">Filtrar</button>
+                </section>
+
+                <br><br>
+                <!-- Grade de Cursos -->
+                <div class="cursos-grid" id="cursosGrid"></div>
+
+                <!-- Modal de Compra -->
+                <div class="purchase-modal" id="purchaseModal" style="display: none;">
+                    <div class="purchase-modal-content">
+                        <button class="close-modal" onclick="closePurchaseModal()">✕</button>
+                        <h2 id="modalCursoNome"></h2>
+                        <p id="modalCursoDesc"></p>
+                        <div class="modal-details">
+                            <p><strong>Professor:</strong> <span id="modalCursoProf"></span></p>
+                            <p><strong>Nível:</strong> <span id="modalCursoNivel"></span></p>
+                            <p><strong>Duração:</strong> <span id="modalCursoDuracao"></span></p>
+                            <p><strong>Valor:</strong> <span id="modalCursoValor"></span></p>
+                        </div>
+                        <button class="btn-compra" onclick="comprarCurso()">Realizar Compra</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEÇÃO 4: VIDEOAULAS -->
             <div id="content-aulas" style="display: none;">
                 <div class="aulas-header">
                     <p>Acesse o conteúdo gravado e estude no seu ritmo</p><br>
@@ -207,6 +257,118 @@
     </div>
 
     <script src="../js/student.js"></script>
+    <script>
+        // Carregar funções de cursos quando a página estiver pronta
+        let todosOsCursos = [];
+        let cursoSelecionado = null;
 
-</body>
-</html>
+        async function carregarCursos() {
+            try {
+                const response = await fetch('../src/cursos.json');
+                todosOsCursos = await response.json();
+                renderizarCursos(todosOsCursos);
+            } catch (erro) {
+                console.error('Erro ao carregar cursos:', erro);
+            }
+        }
+
+        function renderizarCursos(cursos) {
+            const grid = document.getElementById('cursosGrid');
+            if (!grid) return;
+            
+            grid.innerHTML = '';
+            const cursosComprados = JSON.parse(localStorage.getItem('cursosComprados') || '[]');
+
+            cursos.forEach(curso => {
+                const cursoComprado = cursosComprados.includes(curso.id);
+                const card = document.createElement('div');
+                card.className = 'curso-card';
+                card.innerHTML = `
+                    <div class="curso-header">
+                        <div class="curso-status">${cursoComprado ? '✓ Comprado' : 'Gratuito'}</div>
+                        <button class="btn-course-action ${cursoComprado ? 'comprado' : ''}" 
+                                onclick="abrirModalCurso(${curso.id})" 
+                                ${cursoComprado ? 'disabled' : ''}>
+                            ${cursoComprado ? '✓' : 'Comprar'}
+                        </button>
+                    </div>
+                    
+                    <div class="curso-category">${curso.categoria}</div>
+                    
+                    <div class="curso-icon">${curso.icone}</div>
+                    
+                    <h3 class="curso-title">${curso.nome}</h3>
+                    
+                    <p class="curso-desc">${curso.descricao}</p>
+                    
+                    <div class="curso-badges">
+                        <span class="badge badge-nivel">${curso.nivel}</span>
+                        <span class="badge badge-duracao">⏱️ ${curso.duracao}</span>
+                    </div>
+                    
+                    <div class="curso-footer">
+                        <div class="curso-info">
+                            <div class="curso-prof"><small>${curso.professor}</small></div>
+                        </div>
+                        <div class="curso-preco">${curso.preco}</div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function abrirModalCurso(cursoId) {
+            cursoSelecionado = todosOsCursos.find(c => c.id === cursoId);
+            if (!cursoSelecionado) return;
+
+            document.getElementById('modalCursoNome').textContent = cursoSelecionado.nome;
+            document.getElementById('modalCursoDesc').textContent = cursoSelecionado.descricao;
+            document.getElementById('modalCursoProf').textContent = cursoSelecionado.professor;
+            document.getElementById('modalCursoNivel').textContent = cursoSelecionado.nivel;
+            document.getElementById('modalCursoDuracao').textContent = cursoSelecionado.duracao;
+            document.getElementById('modalCursoValor').textContent = cursoSelecionado.preco;
+
+            document.getElementById('purchaseModal').style.display = 'flex';
+        }
+
+        function closePurchaseModal() {
+            document.getElementById('purchaseModal').style.display = 'none';
+            cursoSelecionado = null;
+        }
+
+        function comprarCurso() {
+            if (!cursoSelecionado) return;
+
+            const cursosComprados = JSON.parse(localStorage.getItem('cursosComprados') || '[]');
+            if (!cursosComprados.includes(cursoSelecionado.id)) {
+                cursosComprados.push(cursoSelecionado.id);
+                localStorage.setItem('cursosComprados', JSON.stringify(cursosComprados));
+            }
+
+            closePurchaseModal();
+            renderizarCursos(todosOsCursos);
+            
+            alert('Parabéns! Curso comprado com sucesso! 🎉');
+        }
+
+        // Filtro de cursos (após DOM estar pronto)
+        setTimeout(() => {
+            const btnFiltrarCursos = document.getElementById('btnFiltrarCursos');
+            if (btnFiltrarCursos) {
+                btnFiltrarCursos.addEventListener('click', () => {
+                    const searchValue = document.getElementById('searchCurso')?.value.toLowerCase() || '';
+                    const nivelValue = document.getElementById('nivelValue')?.innerText || 'Todos';
+
+                    const cursosFiltrados = todosOsCursos.filter(curso => {
+                        const matchSearch = curso.nome.toLowerCase().includes(searchValue) || 
+                                          curso.instrumento.toLowerCase().includes(searchValue);
+                        const matchNivel = nivelValue === 'Todos' || curso.nivel === nivelValue;
+                        return matchSearch && matchNivel;
+                    });
+
+                    renderizarCursos(cursosFiltrados);
+                });
+            }
+        }, 100);
+    </script>
+

@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "nome": "Violão Iniciante",
+    "instrumento": "Violão",
+    "categoria": "Música",
+    "descricao": "Aprenda os fundamentos do violão com aulas práticas e teóricas",
+    "professor": "Carlos Silva",
+    "nivel": "Iniciante",
+    "duracao": "8 semanas",
+    "preco": "R$ 199,90",
+    "icone": "🎸"
+  },
+  {
+    "id": 2,
+    "nome": "Piano Intermediário",
+    "instrumento": "Piano",
+    "categoria": "Música",
+    "descricao": "Desenvolva suas habilidades no piano com técnicas avançadas",
+    "professor": "Lucas Santos",
+    "nivel": "Intermediário",
+    "duracao": "10 semanas",
+    "preco": "R$ 249,90",
+    "icone": "🎹"
+  },
+  {
+    "id": 3,
+    "nome": "Canto Iniciante",
+    "instrumento": "Canto",
+    "categoria": "Voz",
+    "descricao": "Técnicas vocais e expressão artística desde o início",
+    "professor": "Marina Costa",
+    "nivel": "Iniciante",
+    "duracao": "8 semanas",
+    "preco": "R$ 149,90",
+    "icone": "🎤"
+  },
+  {
+    "id": 4,
+    "nome": "Bateria Avançado",
+    "instrumento": "Bateria",
+    "categoria": "Percussão",
+    "descricao": "Ritmo, coordenação e técnicas de bateria profissional",
+    "professor": "Pedro Oliveira",
+    "nivel": "Avançado",
+    "duracao": "12 semanas",
+    "preco": "R$ 349,90",
+    "icone": "🥁"
+  },
+  {
+    "id": 5,
+    "nome": "Guitarra Intermediário",
+    "instrumento": "Guitarra",
+    "categoria": "Cordas",
+    "descricao": "Rock, blues e estilos diversos na guitarra",
+    "professor": "Carlos Silva",
+    "nivel": "Intermediário",
+    "duracao": "10 semanas",
+    "preco": "R$ 229,90",
+    "icone": "🎸"
+  },
+  {
+    "id": 6,
+    "nome": "Teoria Musical Iniciante",
+    "instrumento": "Teoria",
+    "categoria": "Fundamentos",
+    "descricao": "Fundamentos essenciais de teoria musical para qualquer músico",
+    "professor": "Ana Martins",
+    "nivel": "Iniciante",
+    "duracao": "6 semanas",
+    "preco": "R$ 99,90",
+    "icone": "🎵"
+  }
+]
